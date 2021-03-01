@@ -23,7 +23,7 @@ import com.assignment.recipemanagement.service.IngredientService;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author Sarika
+ * @author Sarika M
  *
  */
 @RestController
