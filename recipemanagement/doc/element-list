@@ -1,0 +1,9 @@
+com.assignment.recipemanagement
+com.assignment.recipemanagement.config
+com.assignment.recipemanagement.controller
+com.assignment.recipemanagement.entity
+com.assignment.recipemanagement.exception
+com.assignment.recipemanagement.repository
+com.assignment.recipemanagement.service
+com.assignment.recipemanagement.utils
+com.assignment.recipemanagement.Utils
