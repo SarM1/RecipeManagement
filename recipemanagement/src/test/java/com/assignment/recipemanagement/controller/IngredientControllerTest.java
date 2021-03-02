@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import com.assignment.recipemanagement.Utils.RecipeManagementConstants;
 import com.assignment.recipemanagement.entity.Ingredient;
 import com.assignment.recipemanagement.exception.RecipeManagementException;
 import com.assignment.recipemanagement.service.IngredientService;
@@ -79,7 +80,7 @@ public class IngredientControllerTest {
 		String uri = "/ingredients/1";
 
 		when(ingredientService.findByIngredientId(Mockito.anyLong())).thenThrow(
-				new RecipeManagementException("Ingredient not found for IngredientId 1", HttpStatus.NOT_FOUND));
+				new RecipeManagementException(RecipeManagementConstants.INGREDIENT_NOT_FOUND.concat("1"), HttpStatus.NOT_FOUND));
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.get(uri)
 				.accept(org.springframework.http.MediaType.APPLICATION_JSON);
 		MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
@@ -88,7 +89,7 @@ public class IngredientControllerTest {
 
 		RecipeManagementException recipeManagementException = (RecipeManagementException) mvcResult
 				.getResolvedException();
-		assertEquals("Ingredient not found for IngredientId 1", recipeManagementException.getErrorMessage());
+		assertEquals(RecipeManagementConstants.INGREDIENT_NOT_FOUND.concat("1"), recipeManagementException.getErrorMessage());
 
 	}
 
@@ -148,14 +149,14 @@ public class IngredientControllerTest {
 	public void deleteIngredient() throws Exception {
 
 		when(ingredientService.deleteIngredient(Mockito.anyLong()))
-				.thenReturn("Ingredient is deleted for ingredientId 1");
+				.thenReturn(RecipeManagementConstants.INGREDIENT_DELETED.concat("1"));
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/ingredients/{id}", 1);
 		MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
 		int status = mvcResult.getResponse().getStatus();
 		assertEquals(200, status);
 		String content = mvcResult.getResponse().getContentAsString();
 		// Ingredient ingredient = UtilsTest.mapJsontoObject(content, Ingredient.class);
-		assertEquals("Ingredient is deleted for ingredientId 1", content);
+		assertEquals(RecipeManagementConstants.INGREDIENT_DELETED.concat("1"), content);
 
 	}
 
@@ -170,7 +171,7 @@ public class IngredientControllerTest {
 
 		RecipeManagementException recipeManagementException = (RecipeManagementException) mvcResult
 				.getResolvedException();
-		assertEquals("Ingredient not found for IngredientId 1", recipeManagementException.getErrorMessage());
+		assertEquals(RecipeManagementConstants.INGREDIENT_NOT_FOUND.concat("1"), recipeManagementException.getErrorMessage());
 
 	}
 

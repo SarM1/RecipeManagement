@@ -6,6 +6,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
+import com.assignment.recipemanagement.Utils.RecipeManagementConstants;
 import com.assignment.recipemanagement.entity.Recipe;
 import com.assignment.recipemanagement.exception.RecipeManagementException;
 import com.assignment.recipemanagement.repository.RecipeRepository;
@@ -44,7 +46,7 @@ public class RecipeService {
 			return recipe;
 
 		} else {
-			throw new RecipeManagementException("Recipe not found for RecipeId " + recipeId, HttpStatus.NOT_FOUND);
+			throw new RecipeManagementException(RecipeManagementConstants.RECIPE_NOT_FOUND+ recipeId, HttpStatus.NOT_FOUND);
 		}
 	}
 
@@ -62,11 +64,11 @@ public class RecipeService {
 
 			recipeRepository.delete(recipe);
 
-			return "Recipe is deleted for Id " + recipeId;
+			return RecipeManagementConstants.RECIPE_DELETED+ recipeId;
 		}
 
 		else {
-			throw new RecipeManagementException("Recipe not found for " + recipeId, HttpStatus.NOT_FOUND);
+			throw new RecipeManagementException(RecipeManagementConstants.RECIPE_NOT_FOUND+recipeId, HttpStatus.NOT_FOUND);
 		}
 
 	}

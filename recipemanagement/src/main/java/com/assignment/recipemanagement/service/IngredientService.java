@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import com.assignment.recipemanagement.Utils.RecipeManagementConstants;
 import com.assignment.recipemanagement.entity.Ingredient;
 import com.assignment.recipemanagement.exception.RecipeManagementException;
 import com.assignment.recipemanagement.repository.IngredientRepository;
@@ -47,7 +48,7 @@ public class IngredientService {
 			return ingredient;
 
 		} else {
-			throw new RecipeManagementException("Ingredient not found for IngredientId " + ingredientId,
+			throw new RecipeManagementException(RecipeManagementConstants.INGREDIENT_NOT_FOUND + ingredientId,
 					HttpStatus.NOT_FOUND);
 		}
 
@@ -73,10 +74,10 @@ public class IngredientService {
 		if (null != ingredient) {
 
 			ingredientRepository.delete(ingredient);
-			return "Ingredient is deleted for ingredientId 1";
+			return RecipeManagementConstants.INGREDIENT_DELETED+ingredientId;
 
 		} else {
-			throw new RecipeManagementException("Ingredient not found for IngredientId " + ingredientId,
+			throw new RecipeManagementException(RecipeManagementConstants.INGREDIENT_NOT_FOUND + ingredientId,
 					HttpStatus.NOT_FOUND);
 		}
 

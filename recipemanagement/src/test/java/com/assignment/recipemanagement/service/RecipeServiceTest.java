@@ -8,6 +8,8 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -15,7 +17,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 
+import com.assignment.recipemanagement.Utils.RecipeManagementConstants;
 import com.assignment.recipemanagement.entity.Ingredient;
 import com.assignment.recipemanagement.entity.Recipe;
 import com.assignment.recipemanagement.entity.RecipeDetail;
@@ -45,7 +49,7 @@ public class RecipeServiceTest {
 		when(recipeRepository.findByRecipeId(Mockito.anyLong())).thenReturn(null);
 		RecipeManagementException exception = assertThrows(RecipeManagementException.class,
 				() -> recipeService.findByRecipeId(new Long(1)));
-		assertEquals("Recipe not found for RecipeId 1", exception.getErrorMessage());
+		assertEquals(RecipeManagementConstants.RECIPE_NOT_FOUND.concat("1"), exception.getErrorMessage());
 
 	}
 
@@ -237,5 +241,27 @@ public class RecipeServiceTest {
 		assertEquals("mix all the three ingredients.Tasty and healthy lemon juice is ready", recipe.getProcedure());
 
 	}
+
+	@Test
+	public void deleteRecipeTest() throws Exception {
+
+		when(recipeRepository.findByRecipeId(Mockito.anyLong())).thenReturn(new Recipe());
+		assertEquals(RecipeManagementConstants.RECIPE_DELETED.concat("1"),recipeService.deleteRecipe(new Long(1)));
+		
+	}
+
+	@Test
+	public void deleteRecipeTestNotFoundTest() throws Exception {
+
+		// mock the data returned by the Service class
+
+		when(recipeRepository.findByRecipeId(Mockito.anyLong())).thenReturn(null);
+		RecipeManagementException exception = assertThrows(RecipeManagementException.class,
+				() -> recipeService.findByRecipeId(new Long(1)));
+		assertEquals(RecipeManagementConstants.RECIPE_NOT_FOUND.concat("1"), exception.getErrorMessage());
+		assertEquals(HttpStatus.NOT_FOUND, exception.getHttpStatus());
+
+	}
+	
 
 }

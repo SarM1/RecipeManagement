@@ -24,6 +24,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import com.assignment.recipemanagement.Utils.RecipeManagementConstants;
 import com.assignment.recipemanagement.entity.Ingredient;
 import com.assignment.recipemanagement.entity.Recipe;
 import com.assignment.recipemanagement.entity.RecipeDetail;
@@ -357,14 +358,14 @@ public class RecipeControllerTest {
 
 		// mock the data returned by the Service class
 
-		when(recipeService.deleteRecipe(Mockito.anyLong())).thenReturn("Recipe is deleted for recipeId 1");
+		when(recipeService.deleteRecipe(Mockito.anyLong())).thenReturn(RecipeManagementConstants.RECIPE_DELETED.concat("1"));
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/recipes/{id}", 1);
 		MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
 		int status = mvcResult.getResponse().getStatus();
 		assertEquals(200, status);
 		String content = mvcResult.getResponse().getContentAsString();
 		// Ingredient ingredient = UtilsTest.mapJsontoObject(content, Ingredient.class);
-		assertEquals("Recipe is deleted for recipeId 1", content);
+		assertEquals(RecipeManagementConstants.RECIPE_DELETED.concat("1"), content);
 
 	}
 
@@ -372,14 +373,14 @@ public class RecipeControllerTest {
 	public void deleteRecipeandRecipedoesNotExist() throws Exception {
 
 		when(recipeService.deleteRecipe(Mockito.anyLong()))
-				.thenThrow(new RecipeManagementException("Recipe not found for RecipeId 1", HttpStatus.NOT_FOUND));
+				.thenThrow(new RecipeManagementException(RecipeManagementConstants.RECIPE_NOT_FOUND.concat("1"), HttpStatus.NOT_FOUND));
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/recipes/{id}", 1);
 		MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
 		assertTrue(mvcResult.getResolvedException() instanceof RecipeManagementException);
 
 		RecipeManagementException recipeManagementException = (RecipeManagementException) mvcResult
 				.getResolvedException();
-		assertEquals("Recipe not found for RecipeId 1", recipeManagementException.getErrorMessage());
+		assertEquals(RecipeManagementConstants.RECIPE_NOT_FOUND.concat("1"), recipeManagementException.getErrorMessage());
 
 	}
 

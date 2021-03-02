@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.assignment.recipemanagement.Utils.RecipeManagementConstants;
 import com.assignment.recipemanagement.entity.Recipe;
 import com.assignment.recipemanagement.exception.RecipeManagementException;
 import com.assignment.recipemanagement.service.RecipeService;
@@ -29,7 +31,7 @@ public class RecipeController {
 	
 	@GetMapping(value= "/login")
     public ResponseEntity<String> login() {
-        return ResponseEntity.ok("This is Recipes home page");
+        return ResponseEntity.ok(RecipeManagementConstants.WELCOME_MESSAGE);
 	}
 
 	/**

@@ -9,6 +9,8 @@ User could provide  following details in input:
 * All the ingredients used in the Recipe .Ingredients are pulled from a master list of ingredients .
 * Quantity of each ingredient used  for the preparation.
 * System would insert the time stamp of creation for the   recipe .Also this time stamp would be created for each ingredient
+*In memory authentication is provided .
+
 
 #Install & Running
 ##Pre-requisites
@@ -24,6 +26,12 @@ User could provide  following details in input:
 * prod mode:
 	mvn spring-boot:run -Dspring-boot.run.profiles=prod
 
+#DB:
+ Following are the tables :
+ Recipe
+ Ingredient
+ RecipeDetails(many  to one relationship with Recipe and Ingredient )
+ 
 
 
 #Rest services 
@@ -42,9 +50,11 @@ CRUD operations for Recipe  and Ingredients are  available-
 
 * Spring  Boot version: 2.3.9
 * Java Version: 1.8
-* Maven: Dependency Management
+* Maven version 3.3: Dependency Management
 
 #Authors
 * Sarika
+
+
 
 
