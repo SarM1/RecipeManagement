@@ -1,7 +1,7 @@
-#Recipe Management System
-Recipe Management system to create and maintain Recipes .
+#Recipe Management System:
+* Recipe Management system to create and maintain Recipes .
 
-#About the application
+#About the application:
 User could provide  following details in input:
 * Procedure to prepare the dish.
 * Type of recipe ( Vegetarian  or Non Vegetarian)
@@ -34,9 +34,9 @@ User could provide  following details in input:
  
 
 
-#Rest services 
-/recipemanagement is the context root for the application 
-CRUD operations for Recipe  and Ingredients are  available-
+#Rest services: 
+/recipemanagement is the context root for the application .
+Following CRUD operations for Recipe  and Ingredients are  available
 
 * /recipes/{id}(request type GET to fetch and DELETE to delete the recipe)
 * /recipes/all (request type GET to fetch all the recipes )
