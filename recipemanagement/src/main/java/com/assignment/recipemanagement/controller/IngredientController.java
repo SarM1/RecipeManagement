@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.assignment.recipemanagement.Utils.RecipeManagementConstants;
 import com.assignment.recipemanagement.entity.Ingredient;
 import com.assignment.recipemanagement.exception.RecipeManagementException;
 import com.assignment.recipemanagement.service.IngredientService;
@@ -41,7 +42,8 @@ public class IngredientController {
 	 */
 	@GetMapping(value = "/login")
 	public ResponseEntity<String> login() {
-		return ResponseEntity.ok("this is ingredients homepage");
+		
+		return ResponseEntity.ok(RecipeManagementConstants.WELCOME_MESSAGE);
 	}
 
 	/**
@@ -52,7 +54,7 @@ public class IngredientController {
 	 */
 	@PostMapping("/")
 	public ResponseEntity<Ingredient> saveIngredient(@Valid @RequestBody Ingredient ingredient) {
-		// log.info("message");
+		
 		return new ResponseEntity<>(ingredientService.saveIngredient(ingredient), HttpStatus.OK);
 	}
 
@@ -64,7 +66,7 @@ public class IngredientController {
 	 */
 	@PutMapping("/")
 	public ResponseEntity<Ingredient> saveorUpdateIngredient(@Valid @RequestBody Ingredient ingredient) {
-		// log.info("message");
+		
 		return new ResponseEntity<>(ingredientService.saveIngredient(ingredient), HttpStatus.OK);
 	}
 
@@ -78,8 +80,7 @@ public class IngredientController {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> deleteIngredient(@PathVariable("id") Long ingredientId)
 			throws RecipeManagementException {
-		// log.info("message");
-
+		
 		return new ResponseEntity<>(ingredientService.deleteIngredient(ingredientId), HttpStatus.OK);
 
 	}
@@ -94,6 +95,7 @@ public class IngredientController {
 	@GetMapping("/{id}")
 	public ResponseEntity<Ingredient> findByIngredientId(@PathVariable("id") Long ingredientId)
 			throws RecipeManagementException {
+		
 		return new ResponseEntity<>(ingredientService.findByIngredientId(ingredientId), HttpStatus.OK);
 
 	}
@@ -105,6 +107,7 @@ public class IngredientController {
 	 */
 	@GetMapping("/all")
 	public ResponseEntity<List<Ingredient>> findAllIngredients() {
+		
 		return new ResponseEntity<>(ingredientService.findAllIngredients(), HttpStatus.OK);
 
 	}

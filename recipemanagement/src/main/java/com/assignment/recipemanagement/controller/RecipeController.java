@@ -28,36 +28,34 @@ public class RecipeController {
 
 	@Autowired
 	private RecipeService recipeService;
-	
-	@GetMapping(value= "/login")
-    public ResponseEntity<String> login() {
-        return ResponseEntity.ok(RecipeManagementConstants.WELCOME_MESSAGE);
+
+	@GetMapping(value = "/login")
+	public ResponseEntity<String> login() {
+		return ResponseEntity.ok(RecipeManagementConstants.WELCOME_MESSAGE);
 	}
 
 	/**
-	 * Save a recipe 
+	 * Save a recipe
 	 * @param recipe
 	 * @return saved Recipe
 	 */
 	@PostMapping("/")
 	public ResponseEntity<Recipe> saveRecipe(@RequestBody Recipe recipe) {
-		// log.info("message");
+		
 		return new ResponseEntity<>(recipeService.saveRecipe(recipe), HttpStatus.OK);
 	}
 
-	
 	/**
 	 * Update a recipe
 	 * @param recipe
-	 * @return saved Recipe 
+	 * @return saved Recipe
 	 */
 	@PutMapping("/")
 	public ResponseEntity<Recipe> saveorUpdateRecipe(@RequestBody Recipe recipe) {
-		// log.info("message");
+
 		return new ResponseEntity<>(recipeService.saveRecipe(recipe), HttpStatus.OK);
 	}
 
-	
 	/**
 	 * Delete a Recipe
 	 * @param recipeId
@@ -66,30 +64,32 @@ public class RecipeController {
 	 */
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> deleteRecipe(@PathVariable("id") Long recipeId) throws RecipeManagementException {
-		// log.info("message");
+
 		return new ResponseEntity<>(recipeService.deleteRecipe(recipeId), HttpStatus.OK);
 
 	}
 
 	/**
-	 * find a recipe by its id 
+	 * find a recipe by its id
 	 * @param recipeId
 	 * @return Recipe
 	 * @throws RecipeManagementException
 	 */
 	@GetMapping("/{id}")
 	public ResponseEntity<Recipe> findByRecipeId(@PathVariable("id") Long recipeId) throws RecipeManagementException {
+		
 		return new ResponseEntity<>(recipeService.findByRecipeId(recipeId), HttpStatus.OK);
 
 	}
 
 	/**
-	 * find all the recipes 
+	 * find all the recipes
 	 * @return list of all the recipes
 	 * @throws RecipeManagementException
 	 */
 	@GetMapping("/all")
 	public ResponseEntity<List<Recipe>> findAllRecipes() throws RecipeManagementException {
+		
 		return new ResponseEntity<>(recipeService.findAllRecipes(), HttpStatus.OK);
 
 	}
