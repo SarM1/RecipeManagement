@@ -28,9 +28,9 @@ User could provide  following details in input:
 
 #DB:
  Following are the tables :
- Recipe
- Ingredient
- RecipeDetails(many  to one relationship with Recipe and Ingredient )
+* Recipe
+* Ingredient
+* RecipeDetails(many  to one relationship with Recipe and Ingredient )
  
 
 
